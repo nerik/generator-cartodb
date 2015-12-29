@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:es6": "babel main.js --presets es2015 -o ~main.js",
-    "build:libs": "cat node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js > ~libs.js",
-    "build:css": "./node_modules/.bin/postcss -u autoprefixer style.css -o ~style.css",
+    "build:es6": "babel _main.js --presets es2015 -o main.js",
+    "build:libs": "cat node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js > libs.js",
+    "build:css": "./node_modules/.bin/postcss -u autoprefixer _main.css -o main.css",
     "build": "npm run build:libs && npm run build:es6 && npm run build:css"
   },
   "repository": {

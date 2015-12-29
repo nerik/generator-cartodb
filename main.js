@@ -1,5 +1,7 @@
+'use strict';
+
 console.log('pouet');
 
-setInterval(a => {
-  console.log('lala')
-})
+setInterval(function (a) {
+  console.log('lala');
+});
