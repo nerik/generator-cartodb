@@ -9,7 +9,7 @@ Then :
 npm run dev
 ```
 
-Tada ! You get a lightweight but complete dev environnement with
+Tada ! A browser opens on [something like that](http://bl.ocks.org/nerik/22d1b831133180adcd66), and you get a lightweight but complete dev environnement, with :
 - es6 to es5 (babel)
 - postCSS (for now only has autoprefixer)
 - a server
