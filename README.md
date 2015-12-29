@@ -15,6 +15,7 @@ Tada ! A browser opens on [something like that](http://bl.ocks.org/nerik/22d1b83
 - a server
 - js and css watch
 - live reload
+- npm is used as a task runner handling all of that (see scripts section in [package.json](https://github.com/nerik/generator-cartodb/blob/master/package.json))
 
 Filenames are optimized to appear in a nice order on gists/bl.ocks
 
