@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Hello, cartodb-generator!!!</title>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
   <link rel="stylesheet" href="main-dist.css" media="screen">
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
   <script src="//localhost:9091"></script>
 </head>
+
+
 <body>
-  Hello, cartodb-generator!!!
+  <div id="map"></div>
+
+  <!-- include cartodb.js library -->
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
   <script type="text/javascript" src="libs-dist.js"></script>
   <script type="text/javascript" src="main-dist.js"></script>
   <script type="text/javascript">
-    console.log($('body').addClass('lala'))
     console.log(_.now())
   </script>
 </body>
