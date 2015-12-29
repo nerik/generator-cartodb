@@ -11,7 +11,12 @@
     "build": "npm run build:libs && npm run build:es6 && npm run build:css",
     "watch:es6": "npm run build:es6 -- -w",
     "watch:css": "npm run build:css -- -w",
-    "watch": "npm run watch:es6 & npm run watch:css"
+    "watch": "npm run watch:es6 & npm run watch:css",
+    "livereload": "live-reload --port 9091 .",
+    "bootstrap": "npm run build:libs",
+    "open": "opener http://localhost:9090",
+    "serve": "http-server -s -p 9090 .",
+    "dev": "npm run bootstrap -s && npm run open -s && npm run watch -s & npm run livereload -s & npm run serve"
   },
   "repository": {
     "type": "git",
@@ -31,6 +36,9 @@
     "autoprefixer": "^6.2.2",
     "babel-cli": "^6.3.17",
     "babel-preset-es2015": "^6.3.13",
+    "http-server": "^0.8.5",
+    "live-reload": "^1.1.0",
+    "opener": "^1.4.1",
     "postcss-cli": "^2.3.3"
   },
   "dependencies": {
