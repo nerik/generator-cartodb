@@ -28,4 +28,5 @@ gistup
 gistup-rename $title
 touch ' .$title'
 ```
+- automatic thumbnail generation for bl.ocks?
 - add multiple templates to the Yo generator
