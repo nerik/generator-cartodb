@@ -1,5 +1,5 @@
-console.log('pouet');
+console.log('hello js');
 
-setInterval(a => {
-  console.log('lala')
+setTimeout(a => {
+  console.log('hello es6!!')
 })

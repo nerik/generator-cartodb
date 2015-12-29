@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:es6": "babel _main.js --presets es2015 -o main.js",
-    "build:libs": "cat node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js > libs.js",
-    "build:css": "./node_modules/.bin/postcss -u autoprefixer _main.css -o main.css",
-    "build": "npm run build:libs && npm run build:es6 && npm run build:css"
+    "build:es6": "babel _main.js --presets es2015 -o main-dist.js",
+    "build:libs": "cat node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js > libs-dist.js",
+    "build:css": "./node_modules/.bin/postcss -u autoprefixer _main.css -o main-dist.css",
+    "build": "npm run build:libs && npm run build:es6 && npm run build:css",
+    "watch:es6": "npm run build:es6 -- -w",
+    "watch:css": "npm run build:css -- -w",
+    "watch": "npm run watch:es6 & npm run watch:css"
   },
   "repository": {
     "type": "git",
