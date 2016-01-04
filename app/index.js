@@ -50,7 +50,7 @@ module.exports = generators.Base.extend({
 
     this.prompt(prompts, function(props) {
       this.props = props;
-      done();
+      done(); 
     }.bind(this));
   },
 
