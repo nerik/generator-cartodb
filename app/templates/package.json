@@ -2,7 +2,7 @@
   "name": "<%= props.projectName %>",
   "version": "0.0.1",
   "description": "<%= props.projectDescription %>",
-  "main": "main-dist.js",
+  "main": "zzz-dist.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:es6": "babel main.js --presets es2015 -o zzz-dist.js",
@@ -16,7 +16,8 @@
     "bootstrap": "npm run build:libs",
     "open": "opener http://localhost:9090",
     "serve": "http-server -s -p 9090 .",
-    "dev": "npm run bootstrap -s && npm run open -s && npm run watch -s & npm run livereload -s & npm run serve"
+    "dev": "npm run bootstrap -s && npm run open -s && npm run watch -s & npm run livereload -s & npm run serve",
+    "gist": "gistup && gistup-rename '<%= props.projectName %> - <%= props.projectDescription %>'"
   },
   "repository": {
     "type": "git",

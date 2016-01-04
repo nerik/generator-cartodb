@@ -33,13 +33,18 @@ module.exports = generators.Base.extend({
     var prompts = [
       {
         name: 'projectName',
-        message: 'What is your project name?',
+        message: 'What is your project name? (no spaces)',
         default: 'cartodb-viz'
       },
       {
         name: 'projectDescription',
         message: 'A description for your project?',
         default: 'A visualization made with CartoDB.'
+      },
+      {
+        name: 'gist',
+        message: 'Do you want me to create a gist automatically?',
+        default: true
       }
     ].concat(libs);
 
@@ -50,6 +55,8 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
+    this.props.projectName = this.props.projectName.replace(/\s+/g, '');
+
     this.props.libsPaths = [];
     this.props.libsDeps = [];
 
@@ -65,8 +72,20 @@ module.exports = generators.Base.extend({
     this.copy('index.html', 'index.html');
     this.copy('main.css', 'main.css');
     this.copy('main.js', 'main.js');
+
+
   },
   install: function () {
     this.npmInstall();
+    if (this.props.gist) {
+      //create dummy file that will appear as the gist title
+      this.spawnCommand('echo', ['"'+ this.props.projectDescription +'"', '>', '..' + this.props.projectName]);
+      // create gist
+      // TODO get hash from gistup output to display bl.ocks URL as well !
+      this.spawnCommand('npm', ['run','gist']);
+    }
+
+    this.spawnCommand('npm', ['run', 'dev']);
+
   }
 });
