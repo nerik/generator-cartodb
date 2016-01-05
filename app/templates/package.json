@@ -6,18 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:es6": "babel main.js --presets es2015 -o zzz-dist.js",
-    "build:libs": "cat <%= props.libsPaths.join(' ') %> > zzz-libs-dist.js",
+    "build:libs": "(<% props.libsPaths.forEach(function(lib) {%>cat <%= lib %>; echo '\n';<% }) %>) > zzz-libs-dist.js",
     "build:css": "./node_modules/.bin/postcss -u autoprefixer main.css -o zzz-dist.css",
     "build": "npm run build:libs && npm run build:es6 && npm run build:css",
     "watch:es6": "npm run build:es6 -- -w",
     "watch:css": "npm run build:css -- -w",
     "watch": "npm run watch:es6 & npm run watch:css",
     "livereload": "live-reload --port 9091 .",
-    "bootstrap": "npm run build:libs",
     "open": "opener http://localhost:9090",
     "serve": "http-server -s -p 9090 .",
-    "dev": "npm run bootstrap -s && npm run open -s && npm run watch -s & npm run livereload -s & npm run serve",
-    "gist": "gistup && gistup-rename '<%= props.projectName %> - <%= props.projectDescription %>'"
+    "dev": "npm run build -s && npm run open -s && npm run watch -s & npm run livereload -s & npm run serve",
+    "gist": "echo '<%= props.projectDescription %>' > '..<%= props.projectName %>' && gistup && gistup-rename '<%= props.projectName %> - <%= props.projectDescription %>'"
   },
   "repository": {
     "type": "git",
@@ -39,7 +38,8 @@
     "http-server": "^0.8.5",
     "live-reload": "^1.1.0",
     "opener": "^1.4.1",
-    "postcss-cli": "^2.3.3"
+    "postcss-cli": "^2.3.3",
+    "gistup": "^0.1.2"
   },
   "dependencies": {
     <%- props.libsDeps.join(', ') %>

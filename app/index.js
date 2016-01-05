@@ -1,18 +1,30 @@
 var generators = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var _ = require('underscore');
 
 var libs = [
   {
     name: 'jquery',
-    message: 'Should I include jQuery?',
     path: 'node_modules/jquery/dist/jquery.min.js',
-    default: true
+    skipPrompt: true  /* cartodb.js has a hard dependency on jQuery, so thi is not optional */
   },
   {
     name: 'underscore',
     message: 'Should I include underscore?',
     path: 'node_modules/underscore/underscore-min.js',
+    default: true
+  },
+  {
+    name: 'moment',
+    message: 'Should I include moment.js?',
+    path: 'node_modules/moment/min/moment-with-locales.min.js',
+    default: true
+  },
+  {
+    name: 'bootstrap',
+    message: 'Should I include Bootstrap?',
+    path: 'node_modules/bootstrap/dist/js/bootstrap.min.js',
     default: true
   }
 ]
@@ -46,11 +58,11 @@ module.exports = generators.Base.extend({
         message: 'Do you want me to create a gist automatically?',
         default: true
       }
-    ].concat(libs);
+    ].concat(_.filter(libs, function(lib) { return lib.skipPrompt !== true; }));
 
     this.prompt(prompts, function(props) {
       this.props = props;
-      done(); 
+      done();
     }.bind(this));
   },
 
@@ -61,7 +73,7 @@ module.exports = generators.Base.extend({
     this.props.libsDeps = [];
 
     libs.forEach(function (currentValue) {
-      if (this.props[currentValue.name] === true) {
+      if (this.props[currentValue.name] === true || currentValue.skipPrompt === true) {
         this.props.libsPaths.push(currentValue.path);
         this.props.libsDeps.push('"' + currentValue.name + '" : "*"');
       }
@@ -76,16 +88,18 @@ module.exports = generators.Base.extend({
 
   },
   install: function () {
-    this.npmInstall();
-    if (this.props.gist) {
-      //create dummy file that will appear as the gist title
-      this.spawnCommand('echo', ['"'+ this.props.projectDescription +'"', '>', '..' + this.props.projectName]);
-      // create gist
-      // TODO get hash from gistup output to display bl.ocks URL as well !
-      this.spawnCommand('npm', ['run','gist']);
-    }
+    this.npmInstall('',{}, function () {
+      this.spawnCommand('npm', ['run', 'build']).on('close', function (code) {
+        this.log('Ready. Run ' + chalk.blue('npm run dev') + ' to get started');
 
-    this.spawnCommand('npm', ['run', 'dev']);
+        if (this.props.gist === true) {
+          // create gist
+          // TODO get hash from gistup output to display bl.ocks URL as well !
+          this.spawnCommand('npm', ['run','gist']);
+        }
+
+      }.bind(this));
+    }.bind(this));
 
   }
 });
