@@ -3,9 +3,9 @@ This is a [yo](http://yeoman.io/) generator that will quickly set up the perfect
 
 
 
-First, install yo :
+First, install yo, then the yo CartoDB generator :
 ```
-npm i -g yo
+npm i -g yo generator-cartodb
 ```
 
 Run the CartoDB generator:
