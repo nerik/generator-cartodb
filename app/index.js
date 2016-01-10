@@ -1,3 +1,6 @@
+/* eslint-env node */
+/* eslint quotes: [2, "simple"] */
+
 var generators = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -50,7 +53,7 @@ module.exports = generators.Base.extend({
 
     this.prompt(prompts, function(props) {
       this.props = props;
-      done(); 
+      done();
     }.bind(this));
   },
 
