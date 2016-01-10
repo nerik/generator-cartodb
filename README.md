@@ -8,16 +8,8 @@ First, install yo :
 npm i -g yo
 ```
 
-(Temp workflow before submitting this to npm) Clone this repo, cd in it, then
+Run the CartoDB generator:
 ```
-npm link
-```
-
-Then :
-
-```
-mkdir MyViz
-cd MyViz
 yo cartodb
 ```
 
@@ -33,12 +25,5 @@ Filenames are optimized to appear in a nice order on gists/bl.ocks
 Todo :
 - eshint
 - add more postCss plugins
-- turn into a Yo Generator
-- bootstrap gists/bl.ocks with proper name :
-```
-gistup
-gistup-rename $title
-touch ' .$title'
-```
 - automatic thumbnail generation for bl.ocks?
 - add multiple templates to the Yo generator
