@@ -3,21 +3,13 @@ This is a [yo](http://yeoman.io/) generator that will quickly set up the perfect
 
 
 
-First, install yo :
+First, install yo, then the yo CartoDB generator :
 ```
-npm i -g yo
-```
-
-(Temp workflow before submitting this to npm) Clone this repo, cd in it, then
-```
-npm link
+npm i -g yo generator-cartodb
 ```
 
-Then :
-
+Run the CartoDB generator:
 ```
-mkdir MyViz
-cd MyViz
 yo cartodb
 ```
 
@@ -33,12 +25,5 @@ Filenames are optimized to appear in a nice order on gists/bl.ocks
 Todo :
 - eshint
 - add more postCss plugins
-- turn into a Yo Generator
-- bootstrap gists/bl.ocks with proper name :
-```
-gistup
-gistup-rename $title
-touch ' .$title'
-```
 - automatic thumbnail generation for bl.ocks?
 - add multiple templates to the Yo generator
