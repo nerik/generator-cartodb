@@ -1,7 +1,7 @@
 /* eslint-env node */
 /* eslint quotes: [2, "simple"] */
 
-var generators = require('yeoman-generator');
+var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var _ = require('underscore');
@@ -32,11 +32,11 @@ var libs = [
   }
 ]
 
-module.exports = generators.Base.extend({
-  constructor: function () {
-  // Calling the super constructor is important so our generator is correctly set up
-    generators.Base.apply(this, arguments);
-  },
+module.exports = yeoman.generators.Base.extend({
+  // constructor: function () {
+  // // Calling the super constructor is important so our generator is correctly set up
+  //   generators.Base.apply(this, arguments);
+  // },
 
   prompting: function () {
     var done = this.async();
@@ -59,7 +59,7 @@ module.exports = generators.Base.extend({
       {
         name: 'gist',
         message: 'Do you want me to create a gist automatically?',
-        default: true
+        default: false
       }
     ].concat(_.filter(libs, function(lib) { return lib.skipPrompt !== true; }));
 
@@ -80,18 +80,20 @@ module.exports = generators.Base.extend({
         this.props.libsPaths.push(currentValue.path);
         this.props.libsDeps.push('"' + currentValue.name + '" : "*"');
       }
-    }.bind(this))
+    }.bind(this));
 
-    this.copy('package.json', 'package.json');
-    this.copy('.gitignore', '.gitignore');
-    this.copy('index.html', 'index.html');
-    this.copy('main.css', 'main.css');
-    this.copy('main.js', 'main.js');
-
-
+    var templateFiles = ['package.json', '.gitignore', 'index.html', 'main.css', 'main.js'];
+    templateFiles.forEach(function (templateFile) {
+      this.fs.copyTpl(
+        this.templatePath(templateFile),
+        this.destinationPath(templateFile),
+        this
+      );
+    }.bind(this));
   },
+
   install: function () {
-    this.npmInstall('',{}, function () {
+    this.npmInstall('', {}, function () {
       this.spawnCommand('npm', ['run', 'build']).on('close', function (code) {
         this.log('Ready. Run ' + chalk.blue('npm run dev') + ' to get started');
 
