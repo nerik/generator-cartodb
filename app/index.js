@@ -4,7 +4,6 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
-var _ = require('underscore');
 
 var libs = [
   {
@@ -61,7 +60,7 @@ module.exports = yeoman.generators.Base.extend({
         message: 'Do you want me to create a gist automatically?',
         default: false
       }
-    ].concat(_.filter(libs, function(lib) { return lib.skipPrompt !== true; }));
+    ].concat(libs.filter(function(lib) { return lib.skipPrompt !== true; }));
 
     this.prompt(prompts, function(props) {
       this.props = props;
