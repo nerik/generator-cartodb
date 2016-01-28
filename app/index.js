@@ -81,7 +81,7 @@ module.exports = yeoman.Base.extend({
       }
     }.bind(this));
 
-    var templateFiles = ['package.json', '.gitignore', 'index.html', 'main.css', 'main.js'];
+    var templateFiles = ['package.json', 'gitignore.tpl', 'index.html', 'main.css', 'main.js'];
     templateFiles.forEach(function (templateFile) {
       this.fs.copyTpl(
         this.templatePath(templateFile),
