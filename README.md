@@ -27,3 +27,5 @@ Todo :
 - add more postCss plugins
 - automatic thumbnail generation for bl.ocks?
 - add multiple templates to the Yo generator
+- fix gitignore
+- es6 and postcss optional (expert mode)
