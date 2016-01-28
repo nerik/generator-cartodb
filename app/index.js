@@ -31,7 +31,7 @@ var libs = [
   }
 ]
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = yeoman.Base.extend({
   // constructor: function () {
   // // Calling the super constructor is important so our generator is correctly set up
   //   generators.Base.apply(this, arguments);
