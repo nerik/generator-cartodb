@@ -59,6 +59,11 @@ module.exports = yeoman.Base.extend({
         name: 'gist',
         message: 'Do you want me to create a gist automatically?',
         default: false
+      },
+      {
+        name: 'transpile',
+        message: 'Transpile CSS (PostCSS) and ES6 (babel) ?',
+        default: false
       }
     ].concat(libs.filter(function(lib) { return lib.skipPrompt !== true; }));
 
@@ -81,6 +86,9 @@ module.exports = yeoman.Base.extend({
       }
     }.bind(this));
 
+    this.props.mainJs = (this.props.transpile) ? 'zzz-dist.js' : 'main.js';
+    this.props.mainCss = (this.props.transpile) ? 'zzz-dist.css' : 'main.css';
+
     var templateFiles = ['package.json', 'gitignore.tpl', 'index.html', 'main.css', 'main.js'];
     templateFiles.forEach(function (templateFile) {
       this.fs.copyTpl(
@@ -94,7 +102,7 @@ module.exports = yeoman.Base.extend({
   install: function () {
     this.npmInstall('', {}, function () {
       this.spawnCommand('npm', ['run', 'build']).on('close', function (code) {
-        this.log('Ready. Run ' + chalk.blue('npm run dev') + ' to get started');
+        this.log('Ready. Run ' + chalk.green('npm run dev') + ' to get started');
 
         if (this.props.gist === true) {
           // create gist

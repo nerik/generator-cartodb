@@ -26,6 +26,6 @@ Todo :
 - eshint
 - add more postCss plugins
 - automatic thumbnail generation for bl.ocks?
-- add multiple templates to the Yo generator
+- add multiple templates to the Yo generator : bootstrap, carto styleguide
 - fix gitignore
 - es6 and postcss optional (expert mode)

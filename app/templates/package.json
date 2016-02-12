@@ -2,20 +2,22 @@
   "name": "<%= props.projectName %>",
   "version": "0.0.1",
   "description": "<%= props.projectDescription %>",
-  "main": "zzz-dist.js",
+  "main": "<%= props.mainJs %>",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:es6": "babel main.js --presets es2015 -o zzz-dist.js",
     "build:libs": "(<% props.libsPaths.forEach(function(lib) {%>cat <%= lib %>; echo '\n';<% }) %>) > zzz-libs-dist.js",
+    <% if (props.transpile) { %>
+    "build:es6": "babel main.js --presets es2015 -o zzz-dist.js",
     "build:css": "./node_modules/.bin/postcss -u autoprefixer main.css -o zzz-dist.css",
-    "build": "npm run build:libs && npm run build:es6 && npm run build:css",
     "watch:es6": "npm run build:es6 -- -w",
     "watch:css": "npm run build:css -- -w",
     "watch": "npm run watch:es6 & npm run watch:css",
+    <% } %>
+    "build": "npm run build:libs<% if (props.transpile) { %> && npm run build:es6 && npm run build:css<% } %>",
     "livereload": "live-reload --port 9091 .",
     "open": "opener http://localhost:9090",
     "serve": "http-server -s -p 9090 .",
-    "dev": "npm run build -s && npm run open -s && npm run watch -s & npm run livereload -s & npm run serve",
+    "dev": "npm run build -s && npm run open -s && <% if (props.transpile) { %>npm run watch -s &<% } %> npm run livereload -s & npm run serve",
     "gist": "echo '<%= props.projectDescription %>' > '..<%= props.projectName %>' && gistup && gistup-rename '<%= props.projectName %> - <%= props.projectDescription %>'"
   },
   "repository": {
@@ -32,13 +34,15 @@
   },
   "homepage": "https://github.com/nerik/generator-cartodb#readme",
   "devDependencies": {
+    <% if (props.transpile) { %>
     "autoprefixer": "^6.2.2",
     "babel-cli": "^6.3.17",
     "babel-preset-es2015": "^6.3.13",
+    "postcss-cli": "^2.3.3",
+    <% } %>
     "http-server": "^0.8.5",
     "live-reload": "^1.1.0",
     "opener": "^1.4.1",
-    "postcss-cli": "^2.3.3",
     "gistup": "^0.1.2"
   },
   "dependencies": {
