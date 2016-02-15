@@ -9,8 +9,8 @@
     "build:libs": "(<% props.libsPaths.forEach(function(lib) {%>cat <%= lib %>; echo '\n';<% }) %>) > zzz-libs-dist.js",
     <% } %>
     <% if (props.transpile) { %>
-    "build:es6": "babel main.js --presets es2015 -o zzz-dist.js",
-    "build:css": "./node_modules/.bin/postcss -u autoprefixer main.css -o zzz-dist.css",
+    "build:es6": "babel index.js --presets es2015 -o zzz-dist.js",
+    "build:css": "./node_modules/.bin/postcss -u autoprefixer index.css -o zzz-dist.css",
     "watch:es6": "npm run build:es6 -- -w",
     "watch:css": "npm run build:css -- -w",
     "watch": "npm run watch:es6 & npm run watch:css",

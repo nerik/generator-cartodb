@@ -92,8 +92,8 @@ module.exports = yeoman.Base.extend({
       this.props.libsDeps.push('"' + libName + '" : "^' + lib.v +'"');
     }.bind(this));
 
-    this.props.mainJs = (this.props.transpile) ? 'zzz-dist.js' : 'main.js';
-    this.props.mainCss = (this.props.transpile) ? 'zzz-dist.css' : 'main.css';
+    this.props.mainJs = (this.props.transpile) ? 'zzz-dist.js' : 'index.js';
+    this.props.mainCss = (this.props.transpile) ? 'zzz-dist.css' : 'index.css';
 
     var that = this;
     function copyTpl(src, dest) {
