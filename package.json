@@ -24,5 +24,8 @@
     "chalk": "^1.1.1",
     "yeoman-generator": "^0.22.2",
     "yosay": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.0.0"
   }
 }

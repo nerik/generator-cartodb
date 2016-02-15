@@ -16,7 +16,7 @@ yo cartodb
 Answer the few questions asked by the CLI, then tada ! A browser opens on [something like that](http://bl.ocks.org/nerik/22d1b831133180adcd66), and you get a lightweight but complete dev environment, with :
 - a simple server
 - files watch + live reload
-- js linting (eshint)
+- js linting (eslint)
 - one of the [starting templates](https://github.com/nerik/generator-cartodb/tree/master/app/templates/carto-templates)
 - optional: a gist created for you
 - optional: es6 to es5 (babel)
