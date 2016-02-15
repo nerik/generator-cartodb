@@ -1,6 +1,3 @@
-/* eslint-env node */
-/* eslint quotes: [2, "simple"] */
-
 var path = require('path');
 var fs = require('fs');
 var yeoman = require('yeoman-generator');
@@ -22,12 +19,12 @@ var prompts = [
   {
     name: 'projectName',
     message: 'What is your project name? (no spaces)',
-    default: 'cartodb-viz'
+    default: 'my-viz'
   },
   {
     name: 'projectDescription',
     message: 'A description for your project?',
-    default: 'Planning SXSW'
+    default: 'Another awesome CartoDB viz !'
   },
   {
     name: 'gist',
@@ -106,6 +103,7 @@ module.exports = yeoman.Base.extend({
 
     copyTpl('package.json','package.json');
     copyTpl('favicon.png','favicon.png');
+    copyTpl('.eslintrc','.eslintrc');
     copyTpl('tpl.gitignore','.gitignore');
 
     var templateFiles = fs.readdirSync(path.join(this.templatePath(), 'carto-templates', this.props.template));

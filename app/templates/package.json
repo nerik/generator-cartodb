@@ -45,7 +45,8 @@
     "http-server": "^0.8.5",
     "live-reload": "^1.1.0",
     "opener": "^1.4.1",
-    "gistup": "^0.1.2"
+    "gistup": "^0.1.2",
+    "eslint": "^2.0.0"
   },
   "dependencies": {
     <%- props.libsDeps.join(', ') %>
