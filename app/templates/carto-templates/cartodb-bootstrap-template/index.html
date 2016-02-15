@@ -13,51 +13,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= props.mainCss %>" media="screen">
 
     <link rel="icon" type="image/png" href="./favicon.png">
+
+    <script src="//localhost:9091"></script>
   </head>
-
-  <style>
-    html, body, #container {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    body {
-      padding-top: 50px;
-    }
-
-    #map {
-      width: auto;
-      height: 100%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.55);
-    }
-
-    #sidebar {
-      width: 300px;
-      height: 100%;
-      max-width: 100%;
-      float: left;
-      -webkit-transition: all 0.25s ease-out;
-      -moz-transition: all 0.25s ease-out;
-      transition: all 0.25s ease-out;
-    }
-
-    .navbar .navbar-brand {
-      font-weight: bold;
-      font-size: 25px;
-      color: #FFFFFF;
-    }
-
-    .navbar {
-      background-image: linear-gradient(to bottom, #2b6988 0%, #1f4b61 100%);
-    }
-
-    .navbar-inverse .navbar-nav>li>a {
-      color: #fff;
-    }
-  </style>
 
   <body>
 
@@ -115,27 +76,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script>
+    <% if (props.libs.length) { %>
+    <script type="text/javascript" src="zzz-libs-dist.js"></script>
+    <% } %>
+    <script type="text/javascript" src="<%= props.mainJs %>"></script>
 
-    var map = new L.Map('map', {
-      center: [40.1,-100.3],
-      zoom: 4
-    });
-
-    L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-    }).addTo(map);
-
-    var layerUrl = 'http://documentation.cartodb.com/api/v2/viz/236085de-ea08-11e2-958c-5404a6a683d5/viz.json';
-
-    cartodb.createLayer(map, layerUrl)
-      .addTo(map)
-      .on('done', function(layer) {
-
-      }).on('error', function() {
-        //log the error
-      });
-
-    </script>
   </body>
 </html>

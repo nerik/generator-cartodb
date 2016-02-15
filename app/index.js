@@ -2,6 +2,7 @@
 /* eslint quotes: [2, "simple"] */
 
 var path = require('path');
+var fs = require('fs');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -66,6 +67,7 @@ var prompts = [
 module.exports = yeoman.Base.extend({
 
   prompting: function () {
+
     var done = this.async();
 
     this.log(yosay(
@@ -106,7 +108,9 @@ module.exports = yeoman.Base.extend({
     copyTpl('favicon.png','favicon.png');
     copyTpl('tpl.gitignore','.gitignore');
 
-    ['index.html', 'main.css', 'main.js'].forEach(function(templateFile) {
+    var templateFiles = fs.readdirSync(path.join(this.templatePath(), 'carto-templates', this.props.template));
+
+    templateFiles.forEach(function(templateFile) {
       copyTpl(path.join('carto-templates', this.props.template, templateFile), templateFile)
     }.bind(this))
 
