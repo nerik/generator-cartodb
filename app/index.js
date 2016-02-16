@@ -19,7 +19,7 @@ var prompts = [
   {
     name: 'projectName',
     message: 'What is your project name? (no spaces)',
-    default: 'my-viz'
+    default: '(will be replaced by cwd)'
   },
   {
     name: 'projectDescription',
@@ -66,6 +66,8 @@ module.exports = yeoman.Base.extend({
   prompting: function () {
 
     var done = this.async();
+
+    prompts[0].default = path.basename(process.cwd());
 
     this.log(yosay(
       'Welcome to the ' + chalk.red('CartoDB') + ' generator!'
