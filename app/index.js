@@ -40,7 +40,7 @@ var prompts = [
   },
   {
     name: 'libs',
-    message: 'Pick optional libraries (remember that _, $ and Backbone are already bundled with CartoDB.js for now)',
+    message: 'Pick optional libraries (remember that _, $ and Backbone are currently already bundled with CartoDB.js)',
     type: 'checkbox',
     choices: Object.keys(libs)
   },
@@ -104,9 +104,10 @@ module.exports = yeoman.Base.extend({
     }
 
     copyTpl('package.json','package.json');
-    copyTpl('favicon.png','favicon.png');
     copyTpl('.eslintrc','.eslintrc');
     copyTpl('tpl.gitignore','.gitignore');
+
+    this.fs.copy(this.templatePath('favicon.ico'), this.destinationPath('favicon.ico'), this);
 
     var templateFiles = fs.readdirSync(path.join(this.templatePath(), 'carto-templates', this.props.template));
 
