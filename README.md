@@ -14,9 +14,9 @@ yo cartodb
 ```
 
 Answer the few questions asked by the CLI, then tada ! You get a lightweight but complete dev environment (see below).
-Then, you can run the local web server : 
+Then, you can run the local web server :
 ```
-npm run dev
+npm start
 ```
 
 Features :

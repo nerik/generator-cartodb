@@ -120,7 +120,7 @@ module.exports = yeoman.Base.extend({
   install: function () {
     this.npmInstall('', {}, function () {
       this.spawnCommand('npm', ['run', 'build']).on('close', function (code) {
-        this.log('Ready. Run ' + chalk.bold.green('npm run dev') + ' to get started');
+        this.log('Ready. Run ' + chalk.bold.green('npm start') + ' to get started');
 
         if (this.props.gist === true) {
           // create gist

@@ -20,7 +20,8 @@
     "open": "opener http://localhost:9090",
     "serve": "http-server -s -p 9090 .",
     "dev": "npm run build -s && (sleep 1 && npm run open -s) & <% if (props.transpile) { %>npm run watch -s &<% } %> npm run livereload -s & npm run serve",
-    "gist": "echo '<%= props.projectDescription %>' > '..<%= props.projectName %>' && gistup && gistup-rename '<%= props.projectName %> - <%= props.projectDescription %>'"
+    "gist": "echo '<%= props.projectDescription %>' > '..<%= props.projectName %>' && gistup && gistup-rename '<%= props.projectName %> - <%= props.projectDescription %>'",
+    "start": "npm run dev"
   },
   "repository": {
     "type": "git",
