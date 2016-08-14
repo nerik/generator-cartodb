@@ -39,6 +39,11 @@ var prompts = [
     default: false
   },
   {
+    name: 'username',
+    message: 'Your CartoDB username',
+    default: 'documentation'
+  },
+  {
     name: 'libs',
     message: 'Pick optional libraries (remember that _, $ and Backbone are currently already bundled with CartoDB.js)',
     type: 'checkbox',
