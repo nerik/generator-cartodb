@@ -104,7 +104,7 @@ module.exports = yeoman.Base.extend({
     }
 
     copyTpl('package.json','package.json');
-    copyTpl('.eslintrc','.eslintrc');
+    copyTpl('.eslintrc.js','.eslintrc.js');
     copyTpl('tpl.gitignore','.gitignore');
 
     this.fs.copy(this.templatePath('favicon.ico'), this.destinationPath('favicon.ico'), this);
