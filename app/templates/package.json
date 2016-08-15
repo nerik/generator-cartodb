@@ -5,7 +5,7 @@
   "main": "<%= props.mainJs %>",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    <% if (props.libs.length) { %>
+    <% if (props.libsPaths.length) { %>
     "build:libs": "(<% props.libsPaths.forEach(function(lib) {%>cat <%= lib %>; echo '\n';<% }) %>) > zzz-libs-dist.js",
     <% } %>
     <% if (props.transpile) { %>

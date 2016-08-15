@@ -10,7 +10,7 @@
     map.addLayer(basemap);
 
     // run create_anonymous_map to generate this URL from CartoCSS and SQL
-    var cartoLayer = L.tileLayer('https://documentation.carto.com/api/v1/map/60caf3c5c9f72a50d76f1facc94ae7fa:0/{z}/{x}/{y}.png');
+    var cartoLayer = L.tileLayer('https://<%= props.username %>.carto.com/api/v1/map/60caf3c5c9f72a50d76f1facc94ae7fa:0/{z}/{x}/{y}.png');
 
     map.addLayer(cartoLayer);
   }

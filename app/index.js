@@ -12,8 +12,32 @@ var libs = {
   'av.color': {
     p: 'node_modules/av.color/av.color.js',
     v: '0.0.1'
-  }
+  },
+  'underscore': {
+    p: 'node_modules/underscore/underscore-min.js',
+    v: '1.8.3'
+  },
+  'request': {
+    v: '2.74.0'
+  },
 }
+
+var libNames = Object.keys(libs);
+
+var templateChoices = [
+  {
+    value: 'simple',
+    name: chalk.bold('simple') + ' basic template with carto.js'
+  }, {
+    value: 'leaflet',
+    name: chalk.bold('leaflet') + ' a leaflet map without carto.js, but with a few tools to interact with Carto',
+    ignoreTemplate: ['mapconfig.json'],
+    mandatoryDependencies: ['underscore', 'request']
+  }, {
+    value: 'cartodb-bootstrap-template',
+    name: chalk.bold('cartodb-bootstrap-template') + ' A starter template for creating a fullscreen cartodb.js map with bootstrap navbar (@chriswong)'
+  }
+];
 
 var prompts = [
   {
@@ -47,21 +71,13 @@ var prompts = [
     name: 'libs',
     message: 'Pick optional libraries (remember that _, $ and Backbone are currently already bundled with CartoDB.js)',
     type: 'checkbox',
-    choices: Object.keys(libs)
+    choices: libNames.filter(function(libName) { return libs[libName].p; })
   },
   {
     name: 'template',
     message: 'Pick a a template to start with',
     type: 'list',
-    choices: [
-      {
-        value: 'simple',
-        name: chalk.bold('simple') + ' basic template'
-      }, {
-        value: 'cartodb-bootstrap-template',
-        name: chalk.bold('cartodb-bootstrap-template') + ' A starter template for creating a fullscreen cartodb.js map with bootstrap navbar (@chriswong)'
-      }
-    ]
+    choices: templateChoices
   }
 ];
 
@@ -92,9 +108,22 @@ module.exports = yeoman.Base.extend({
 
     this.props.libs.forEach(function(libName) {
       var lib = libs[libName];
+
       this.props.libsPaths.push(lib.p);
       this.props.libsDeps.push('"' + libName + '" : "^' + lib.v +'"');
     }.bind(this));
+
+    // include template mandatory deps in package.json, but omit them for js bundle
+    var templateProps = templateChoices.find(function (t) { return t.value === this.props.template; }.bind(this));
+    if (templateProps.mandatoryDependencies) {
+      templateProps.mandatoryDependencies.forEach(function (libName) {
+        console.log(this.props)
+        if (this.props.libs.indexOf(libName) === -1) {
+          this.props.libsDeps.push('"' + libName + '" : "^' + libs[libName].v +'"');
+        }
+      }.bind(this));
+    }
+
 
     this.props.mainJs = (this.props.transpile) ? 'zzz-dist.js' : 'index.js';
     this.props.mainCss = (this.props.transpile) ? 'zzz-dist.css' : 'index.css';
@@ -117,7 +146,18 @@ module.exports = yeoman.Base.extend({
     var templateFiles = fs.readdirSync(path.join(this.templatePath(), 'carto-templates', this.props.template));
 
     templateFiles.forEach(function(templateFile) {
-      copyTpl(path.join('carto-templates', this.props.template, templateFile), templateFile)
+      try {
+        var src = path.join('carto-templates', this.props.template, templateFile);
+
+        if (templateProps.ignoreTemplate && templateProps.ignoreTemplate.indexOf(templateFile) > -1) {
+          this.fs.copy(this.templatePath(src), this.destinationPath(templateFile), this);
+        } else {
+          copyTpl(src, templateFile)
+        }
+
+      } catch (e) {
+        console.log(e)
+      }
     }.bind(this))
 
   },

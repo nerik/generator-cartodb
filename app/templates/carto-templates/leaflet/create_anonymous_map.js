@@ -28,25 +28,19 @@ mapconfig = _.template(mapconfig)({
   sql: sql.replace(/\r?\n|\r/g, ' ')
 });
 
-var username = 'documentation';
-var urlTemplate = 'https://<%= username %>.carto.com/api/v1/map';
-var tilesTemplate = urlTemplate + '/<%= layergroupid %>/{z}/{x}/{y}.png';
+var username = '<%= props.username %>';
+var url = 'https://' + username + '.carto.com/api/v1/map';
 
 request({
-  url: _.template(urlTemplate)({
-    username: username
-  }),
+  url: url,
   method: 'POST',
   json: JSON.parse(mapconfig)
 },
   mapconfig,
   function (error, response) {
     if (!error && response.statusCode == 200) {
-      var tilesURL = _.template(tilesTemplate)({
-        username: username,
-        layergroupid: response.body.layergroupid
-      });
-      process.stdout.write(tilesURL);
+      var tilesUrl = url + '/' + response.body.layergroupid + '/{z}/{x}/{y}.png';
+      process.stdout.write(tilesUrl);
     }
   }
 );
