@@ -9,10 +9,6 @@ var libs = {
     p: 'node_modules/moment/min/moment-with-locales.min.js',
     v: '2.11.2'
   },
-  'av.color': {
-    p: 'node_modules/av.color/av.color.js',
-    v: '0.0.1'
-  },
   'underscore': {
     p: 'node_modules/underscore/underscore-min.js',
     v: '1.8.3'
@@ -117,7 +113,6 @@ module.exports = yeoman.Base.extend({
     var templateProps = templateChoices.find(function (t) { return t.value === this.props.template; }.bind(this));
     if (templateProps.mandatoryDependencies) {
       templateProps.mandatoryDependencies.forEach(function (libName) {
-        console.log(this.props)
         if (this.props.libs.indexOf(libName) === -1) {
           this.props.libsDeps.push('"' + libName + '" : "^' + libs[libName].v +'"');
         }
