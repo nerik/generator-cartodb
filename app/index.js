@@ -141,7 +141,7 @@ module.exports = yeoman.Base.extend({
     var templateFiles = fs.readdirSync(path.join(this.templatePath(), 'carto-templates', this.props.template));
 
     templateFiles.forEach(function(templateFile) {
-      try {
+      if (templateFile !== '.DS_Store') {
         var src = path.join('carto-templates', this.props.template, templateFile);
 
         if (templateProps.ignoreTemplate && templateProps.ignoreTemplate.indexOf(templateFile) > -1) {
@@ -149,12 +149,8 @@ module.exports = yeoman.Base.extend({
         } else {
           copyTpl(src, templateFile)
         }
-
-      } catch (e) {
-        console.log(e)
       }
     }.bind(this))
-
   },
 
   install: function () {
