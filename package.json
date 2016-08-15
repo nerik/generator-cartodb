@@ -1,6 +1,6 @@
 {
   "name": "generator-cartodb",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "CartoDB Generator for Yeoman",
   "main": "index.js",
   "scripts": {
